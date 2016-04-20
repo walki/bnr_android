@@ -15,18 +15,31 @@ public class CheatActivity extends Activity {
     public static final String EXTRA_ANSWER_IS_TRUE = "com.blooot.geoquiz.answer_is_true";
     public static final String EXTRA_ANSWER_SHOWN = "com.bloot.geoquiz.answer_shown";
 
+
+    private static final String KEY_ANSWER_SHOWN = "answer_shown";
+
+
     private boolean mAnswerIsTrue;
+    private boolean mAnswerShown;
 
     private TextView mAnswerTextView;
     private Button mShowAnswerButton;
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cheat);
 
-        setAnswerShownResult(false);
+        if (savedInstanceState != null) {
+            mAnswerShown = savedInstanceState.getBoolean(KEY_ANSWER_SHOWN);
+        }else{
+            mAnswerShown = false;
+        }
+
+
+        setAnswerShownResult();
+
         mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
 
         mAnswerTextView = (TextView)findViewById(R.id.answer_text_view);
@@ -34,20 +47,27 @@ public class CheatActivity extends Activity {
         mShowAnswerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mAnswerShown = true;
                 if (mAnswerIsTrue){
                     mAnswerTextView.setText(R.string.true_button);
                 }else{
                     mAnswerTextView.setText(R.string.false_button);
                 }
-                setAnswerShownResult(true);
+                setAnswerShownResult();
             }
         });
 
     }
 
-    private void setAnswerShownResult(boolean isAnswerShown){
+    @Override
+    public void onSaveInstanceState(Bundle saveInstanceState){
+        super.onSaveInstanceState(saveInstanceState);
+        saveInstanceState.putBoolean(KEY_ANSWER_SHOWN, mAnswerShown);
+    }
+
+    private void setAnswerShownResult(){
         Intent data = new Intent();
-        data.putExtra(EXTRA_ANSWER_SHOWN, isAnswerShown);
+        data.putExtra(EXTRA_ANSWER_SHOWN, mAnswerShown);
         setResult(RESULT_OK, data);
     }
 

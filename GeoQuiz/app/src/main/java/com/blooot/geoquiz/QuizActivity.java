@@ -14,6 +14,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private static final String TAG = "QuizActivity";
     private static final String KEY_INDEX = "index";
+    private static final String KEY_CHEAT = "cheat";
 
 
     private Button mTrueButton;
@@ -31,8 +32,11 @@ public class QuizActivity extends AppCompatActivity {
             new TrueFalse(R.string.question_asia, true),
     };
 
+    private boolean[] mHasCheated = new boolean[]{false, false, false, false, false};
+
+
     private int mCurrentIndex = 0;
-    private boolean mIsCheater;
+    //private boolean mIsCheater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,7 @@ public class QuizActivity extends AppCompatActivity {
 
         if (savedInstanceState != null){
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
+            mHasCheated = savedInstanceState.getBooleanArray(KEY_CHEAT);
         }
 
 
@@ -105,7 +110,9 @@ public class QuizActivity extends AppCompatActivity {
         if (data == null){
             return;
         }
-        mIsCheater = data.getBooleanExtra(CheatActivity.EXTRA_ANSWER_SHOWN, false);
+        if (!mHasCheated[mCurrentIndex]) {
+            mHasCheated[mCurrentIndex] = data.getBooleanExtra(CheatActivity.EXTRA_ANSWER_SHOWN, false);
+        }
     }
 
     @Override
@@ -113,6 +120,7 @@ public class QuizActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
         Log.i(TAG, "onSaveInstanceState");
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
+        savedInstanceState.putBooleanArray(KEY_CHEAT, mHasCheated);
     }
 
     @Override
@@ -159,7 +167,7 @@ public class QuizActivity extends AppCompatActivity {
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isTrueQuestion();
         int messageResId = 0;
-        if (mIsCheater){
+        if (mHasCheated[mCurrentIndex]){
             messageResId = R.string.judgment_toast;
         }else {
             if (userPressedTrue == answerIsTrue) {
@@ -184,7 +192,6 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void setQuestion(boolean next){
-        mIsCheater = false;
         int direction = -1;
         if (next)
         {
