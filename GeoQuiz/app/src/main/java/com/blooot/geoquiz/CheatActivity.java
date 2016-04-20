@@ -2,6 +2,7 @@ package com.blooot.geoquiz;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,7 @@ public class CheatActivity extends Activity {
     private TextView mAnswerTextView;
     private Button mShowAnswerButton;
 
+    private TextView mVersionTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,9 @@ public class CheatActivity extends Activity {
                 setAnswerShownResult();
             }
         });
+
+        mVersionTextView = (TextView)findViewById(R.id.version_text_view);
+        mVersionTextView.setText("API Level " + Build.VERSION.SDK_INT);
 
     }
 

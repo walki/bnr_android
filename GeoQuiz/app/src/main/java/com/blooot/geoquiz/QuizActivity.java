@@ -1,7 +1,10 @@
 package com.blooot.geoquiz;
 
+
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,7 +13,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class QuizActivity extends AppCompatActivity {
+public class QuizActivity extends Activity {
 
     private static final String TAG = "QuizActivity";
     private static final String KEY_INDEX = "index";
@@ -45,6 +48,11 @@ public class QuizActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate(Bundle) called");
 
         setContentView(R.layout.activity_quiz);
+
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setSubtitle("Bodies of Water");
+        }
 
         if (savedInstanceState != null){
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
