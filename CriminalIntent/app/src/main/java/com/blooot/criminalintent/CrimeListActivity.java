@@ -1,6 +1,6 @@
 package com.blooot.criminalintent;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 
 /**
  * Created by roger on 4/21/2016.
