@@ -60,4 +60,10 @@ public class Crime {
         return df.format("EEE, MMM dd, yyyy ", mDate);
     }
 
+    @Override
+    public String toString(){
+        return mTitle;
+    }
+
+
 }
