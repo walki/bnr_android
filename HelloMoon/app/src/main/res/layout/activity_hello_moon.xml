@@ -3,7 +3,6 @@
     android:id="@+id/helloMoonFragment"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:name="com.blooot.hellomoon.HelloMoonFragment">
+    android:layout_height="match_parent">
 
 </fragment>
