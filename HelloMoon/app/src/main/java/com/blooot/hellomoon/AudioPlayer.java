@@ -17,6 +17,18 @@ public class AudioPlayer {
         }
     }
 
+    public void pause()
+    {
+        if (mPlayer != null){
+            if (mPlayer.isPlaying()) {
+                mPlayer.pause();
+
+            }else{
+                mPlayer.start();
+            }
+        }
+    }
+
     public void play(Context c){
         stop();
 
