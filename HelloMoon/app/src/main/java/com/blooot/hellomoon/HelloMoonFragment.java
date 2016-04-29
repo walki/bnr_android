@@ -20,7 +20,14 @@ public class HelloMoonFragment extends Fragment {
     private Button mStopButton;
     private Button mPauseButton;
 
-    private VideoView mVideoView;
+    //private VideoView mVideoView;
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
 
     @Nullable
     @Override
@@ -32,9 +39,9 @@ public class HelloMoonFragment extends Fragment {
         mPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //mPlayer.play(getActivity());
+                mPlayer.play(getActivity());
 
-                mVideoView.start();
+                //mVideoView.start();
             }
         });
 
@@ -50,16 +57,16 @@ public class HelloMoonFragment extends Fragment {
         mStopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //mPlayer.stop();
+                mPlayer.stop();
 
-                mVideoView.stopPlayback();
+                //mVideoView.stopPlayback();
             }
         });
 
-        mVideoView = (VideoView)v.findViewById(R.id.hellomoon_videoView);
-
-        Uri resource = Uri.parse("android.resource://com.blooot.hellomoon/raw/sample_mpeg4");
-        mVideoView.setVideoURI( resource );
+//        mVideoView = (VideoView)v.findViewById(R.id.hellomoon_videoView);
+//
+//        Uri resource = Uri.parse("android.resource://com.blooot.hellomoon/raw/sample_mpeg4");
+//        mVideoView.setVideoURI( resource );
 
         return v;
     }
