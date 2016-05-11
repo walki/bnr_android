@@ -18,13 +18,14 @@ public class CrimeLab {
         mCrimes = new ArrayList<Crime>();
 
         // temporary generation of crimes
-        for(int i = 0; i < 100; ++i){
-            Crime c = new Crime();
-            c.setTitle("Crime #" + i);
-            c.setSolved(i%2==0);
-            mCrimes.add(c);
-        }
+//        for(int i = 0; i < 100; ++i){
+//            Crime c = new Crime();
+//            c.setTitle("Crime #" + i);
+//            c.setSolved(i%2==0);
+//            mCrimes.add(c);
+//        }
     }
+
 
     public static CrimeLab get(Context c){
         if (sCrimeLab == null){
@@ -44,5 +45,9 @@ public class CrimeLab {
             }
         }
         return null;
+    }
+
+    public void addCrime(Crime c){
+        mCrimes.add(c);
     }
 }

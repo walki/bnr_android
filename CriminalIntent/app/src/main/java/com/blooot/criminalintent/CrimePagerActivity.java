@@ -1,12 +1,11 @@
 package com.blooot.criminalintent;
 
-
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -14,7 +13,7 @@ import java.util.UUID;
 /**
  * Created by roger on 4/22/2016.
  */
-public class CrimePagerActivity extends FragmentActivity {
+public class CrimePagerActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
 
@@ -34,7 +33,7 @@ public class CrimePagerActivity extends FragmentActivity {
         FragmentManager fm = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fm) {
             @Override
-            public Fragment getItem(int position) {
+            public android.support.v4.app.Fragment getItem(int position) {
                 Crime crime = mCrimes.get(position);
                 return CrimeFragment.newInstance(crime.getId());
             }
